@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
@@ -42,10 +43,11 @@ fun MessageCard(user: User) {
             modifier = Modifier
                 .size(50.dp)
                 .clip(CircleShape)
+                .border(1.5.dp, MaterialTheme.colors.error, CircleShape)
         )
         Spacer(modifier = Modifier.width(8.dp))
         Column(modifier = Modifier.padding(8.dp)) {
-            Text(text = user.name)
+            Text(text = user.name, color = MaterialTheme.colors.secondaryVariant)
             Spacer(modifier = Modifier.width(4.dp))
             Text(text = user.profession)
         }
