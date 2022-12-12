@@ -47,9 +47,13 @@ fun MessageCard(user: User) {
         )
         Spacer(modifier = Modifier.width(8.dp))
         Column(modifier = Modifier.padding(8.dp)) {
-            Text(text = user.name, color = MaterialTheme.colors.secondaryVariant)
+            Text(
+                text = user.name,
+                color = MaterialTheme.colors.secondaryVariant,
+                style = MaterialTheme.typography.subtitle2
+            )
             Spacer(modifier = Modifier.width(4.dp))
-            Text(text = user.profession)
+            Text(text = user.profession, style = MaterialTheme.typography.body2)
         }
     }
 }
