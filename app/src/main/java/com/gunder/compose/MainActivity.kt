@@ -1,5 +1,6 @@
 package com.gunder.compose
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gunder.compose.data.User
 import com.gunder.compose.ui.theme.ComposeUiTheme
@@ -46,7 +48,7 @@ fun MessageCard(user: User) {
                 .border(1.5.dp, MaterialTheme.colors.error, CircleShape)
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Column(modifier = Modifier.padding(8.dp)) {
+        Column {
             Text(
                 text = user.name,
                 color = MaterialTheme.colors.secondaryVariant,
@@ -63,8 +65,12 @@ fun MessageCard(user: User) {
     }
 }
 
+@Preview(name = "light mode")
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, name = "dark mode")
 @Composable
 fun PreviewMessage() {
-    MessageCard(user = User("Guna Dermawan", "Programmer"))
+    Surface() {
+        MessageCard(user = User("Guna Dermawan", "Programmer"))
+    }
 }
 
