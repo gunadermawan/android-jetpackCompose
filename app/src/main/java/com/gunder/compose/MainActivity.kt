@@ -11,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.gunder.compose.data.User
 import com.gunder.compose.ui.theme.ComposeUiTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +23,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MessageCard(name = "Android")
+                    PreviewMessage()
                 }
             }
         }
@@ -30,14 +31,13 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MessageCard(name: String) {
-    Text(text = "Hello $name")
+fun MessageCard(user: User) {
+    Text(text = user.name)
+    Text(text = user.profession)
 }
 
 @Composable
-fun Greeting() {
-    Column(modifier = Modifier.fillMaxSize(0.5f)) {
-        MessageCard(name = "Guna Dermawan")
-    }
+fun PreviewMessage() {
+    MessageCard(user = User("Guna Dermawan", "Programmer"))
 }
 
