@@ -1,6 +1,7 @@
 package com.gunder.compose
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
@@ -12,36 +13,30 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.gunder.compose.ui.theme.ComposeUiTheme
+import timber.log.Timber
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeUiTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    Greeting()
                 }
             }
         }
     }
 }
 
+@Preview(showBackground = true)
 @Composable
-fun Greeting(name: String) {
-    Column() {
-        Text(text = "Hello $name!")
-        Text(text = "Hello i'm $name!")
+fun Greeting() {
+    Column(modifier = Modifier.fillMaxSize(0.5f)) {
+        Text("Guna Dermawan")
+        Text("Junior Android Developer")
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    ComposeUiTheme {
-        Greeting("Android")
-    }
-}
