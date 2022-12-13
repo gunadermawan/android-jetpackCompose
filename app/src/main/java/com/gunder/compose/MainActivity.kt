@@ -57,7 +57,7 @@ fun MessageCard(user: User) {
             Spacer(modifier = Modifier.width(4.dp))
             Surface(shape = MaterialTheme.shapes.medium, elevation = 1.dp) {
                 Text(
-                    text = user.profession, style = MaterialTheme.typography.body2,
+                    text = user.message, style = MaterialTheme.typography.body2,
                     modifier = Modifier.padding(all = 4.dp)
                 )
             }
