@@ -4,6 +4,8 @@ import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -49,6 +51,10 @@ fun MessageCard(user: User) {
     var isExpanded by remember {
         mutableStateOf(false)
     }
+//    change color when expanded is active
+    val surfaceColor by animateColorAsState(
+        if (isExpanded) MaterialTheme.colors.primary else MaterialTheme.colors.surface
+    )
     Row(modifier = Modifier.padding(12.dp)) {
         Image(
             painter = painterResource(R.drawable.ic_android),
@@ -66,7 +72,14 @@ fun MessageCard(user: User) {
                 style = MaterialTheme.typography.subtitle2
             )
             Spacer(modifier = Modifier.width(4.dp))
-            Surface(shape = MaterialTheme.shapes.medium, elevation = 1.dp) {
+            Surface(
+                shape = MaterialTheme.shapes.medium,
+                color = surfaceColor,
+                modifier = Modifier
+                    .animateContentSize()
+                    .padding(1.dp),
+                elevation = 1.dp
+            ) {
                 Text(
                     text = user.message,
                     style = MaterialTheme.typography.body2,
