@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
@@ -13,6 +14,10 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
@@ -40,6 +45,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MessageCard(user: User) {
+//    to track variable using remember (memory) and mutableStateOf(observable)
+    var isExpanded by remember {
+        mutableStateOf(false)
+    }
     Row(modifier = Modifier.padding(12.dp)) {
         Image(
             painter = painterResource(R.drawable.ic_android),
@@ -50,7 +59,7 @@ fun MessageCard(user: User) {
                 .border(1.5.dp, MaterialTheme.colors.error, CircleShape)
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Column {
+        Column(modifier = Modifier.clickable { isExpanded = !isExpanded }) {
             Text(
                 text = user.name,
                 color = MaterialTheme.colors.secondaryVariant,
@@ -59,8 +68,12 @@ fun MessageCard(user: User) {
             Spacer(modifier = Modifier.width(4.dp))
             Surface(shape = MaterialTheme.shapes.medium, elevation = 1.dp) {
                 Text(
-                    text = user.message, style = MaterialTheme.typography.body2,
-                    modifier = Modifier.padding(all = 4.dp)
+                    text = user.message,
+                    style = MaterialTheme.typography.body2,
+                    modifier = Modifier.padding(all = 4.dp),
+//                 if expanded, showing all its content
+//                otherwise only display the first line
+                    maxLines = if (isExpanded) Int.MAX_VALUE else 1
                 )
             }
         }
