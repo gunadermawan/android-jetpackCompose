@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -17,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.gunder.compose.data.SampleData
 import com.gunder.compose.data.User
 import com.gunder.compose.ui.theme.ComposeUiTheme
 
@@ -29,7 +31,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    PreviewMessage()
+                    PreviewConversation()
                 }
             }
         }
@@ -71,6 +73,21 @@ fun MessageCard(user: User) {
 fun PreviewMessage() {
     Surface() {
         MessageCard(user = User("Guna Dermawan", "Programmer"))
+    }
+}
+
+@Composable
+fun Conversation(messages: List<User>) {
+    LazyColumn() {
+        messages.map { item { MessageCard(it) } }
+    }
+}
+
+@Composable
+@Preview
+fun PreviewConversation() {
+    ComposeUiTheme() {
+        Conversation(SampleData.conversationSample)
     }
 }
 
